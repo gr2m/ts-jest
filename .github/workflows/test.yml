@@ -1,25 +1,25 @@
 name: Test
-
-on:
+"on":
   workflow_call:
     inputs:
       os:
         required: true
         type: string
-
 jobs:
   test:
     strategy:
       fail-fast: false
       matrix:
-        node-version: [14.x, 16.x, 18.x]
+        node-version:
+          - 14.x
+          - 16.x
+          - 18.x
     name: Node v${{ matrix.node-version }} on ${{ inputs.os }}
     runs-on: ${{ inputs.os }}
-
     steps:
-      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b # tag=v3
+      - uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@2fddd8803e2f5c9604345a0b591c3020ee971a93 # tag=v3
+        uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
